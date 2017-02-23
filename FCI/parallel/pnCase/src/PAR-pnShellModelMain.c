@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 
   }  //end test  total input Data
 
-  printf("\n\n");
+  // printf("\n\n");
 
   MPI_Finalize();
 
