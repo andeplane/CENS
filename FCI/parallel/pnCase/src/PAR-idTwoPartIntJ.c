@@ -230,12 +230,16 @@ void id_two_part_intJ(char *filename,SP_BAS *spBas,int calc_CM,
    else if(num < num_elem) { // reduce size nondiag[] to new number
       op_int->id_nondiag_bas = REALLOC(id_nondiag_elem_bas, num, ID_INT, func,
                                                      "new id_nondiag_bas[]");
-      if(op_int->id_nondiag_bas != id_nondiag_elem_bas) { 
-	printf("\n\nRank%d: Error in  id_two_part_intJ():",Rank);
-	printf("\nREALLOC() does not work properly - move memory loc");
-	printf("\nof id_nondiag matrElem to new place\n");
-	MPI_Abort(MPI_COMM_WORLD,Rank);
+      if(op_int->id_nondiag_bas != NULL) {
+          id_nondiag_elem_bas = op_int->id_nondiag_bas;
       }
+//      if(op_int->id_nondiag_bas != id_nondiag_elem_bas) {
+//    printf("\n\nRank%d: Error in  id_two_part_intJ():",Rank);
+//    printf("\nREALLOC() does not work properly - move memory loc");
+//    printf("\nof id_nondiag matrElem to new place\n");
+//    printf("Old ptr: %ld, new ptr: %ld\n", (void*)id_nondiag_elem_bas, (void*)op_int->id_nondiag_bas);
+//    MPI_Abort(MPI_COMM_WORLD,Rank);
+//      }
    }
    free(j_pot.start);  // release temp mem in j_pot
    free(j_pot.two_part);  
